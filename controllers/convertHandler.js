@@ -9,14 +9,15 @@
 function ConvertHandler() {
   
   this.getNum = function(input) {
-  const regex = /[a-zA-z]/
-  let index = input.match(regex)
-  if (!index) return false;
-  let num = input.slice(0, index.index);
-  if (num.length === 0) return 1;
-  if (isNaN(eval(num))) return false;
+    const regexUnits = /[a-zA-z]/
+    const regexNumbers = /^\d+\.*\d*\/*\d*\.*\d*$/
+    let index = input.match(regexUnits)
+    if (!index) return false;
+    let num = input.slice(0, index.index);
+    if (!regexNumbers.test(num)) return false;
+    if (num.length === 0) return 1;
 
-  return eval(num);
+    return eval(num).toFixed(5);
   };
   
   this.getUnit = function(input) {
@@ -43,6 +44,7 @@ function ConvertHandler() {
         return 'km'
       case 'km':
         return 'mi'
+      default: return false
     }
   };
 
@@ -58,21 +60,29 @@ function ConvertHandler() {
     const miToKm = 1.60934;
     
     const num = eval(initNum)
-    
+    let convert
     switch (initUnit) {
       case 'gal':
-        return num * galToL
+        convert = num * galToL
+        break;
       case 'L':
-        return num / galToL
+        convert = num / galToL
+        break;
       case 'lbs':
-        return num * lbsToKg
+        convert = num * lbsToKg
+        break;
       case 'kg':
-        return  num / lbsToKg
+        convert =  num / lbsToKg
+        break;
       case 'mi':
-        return num * miToKm
+        convert = num * miToKm
+        break;
       case 'km':
-        return num / miToKm
+        convert = num / miToKm
+        break;
+      default: return false
     };
+    return convert.toFixed(5);
   }
 
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
