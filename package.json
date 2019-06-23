@@ -7,16 +7,17 @@
 	"description": "What am I about?",
 	"main": "server.js",
 	"scripts": {
-		"start": "nodemon server.js"
+		"start": "nodemon server.js",
+		"test": "mocha -u tdd tests/2_functional-tests.js|| true"
 	},
 	"dependencies": {
 		"body-parser": "^1.15.2",
-		"chai": "^3.5.0",
+		"chai": "^4.2.0",
 		"chai-http": "^3.0.0",
 		"cors": "^2.8.1",
 		"express": "^4.14.0",
 		"helmet": "^3.18.0",
-		"mocha": "^3.2.0",
+		"mocha": "^6.0.0",
 		"mongodb": "^2.2.16",
 		"nodemon": "^1.19.1",
 		"zombie": "^5.0.5"

@@ -72,25 +72,53 @@
         });
       });
 
-      // gall L lbs kg mi km
-    function getNum (input) {
-      switch (input) {
-      case 'gal':
-        return 'L'
-      case 'L':
-        return 'gal'
-      case 'lbs':
-        return 'kg'
-      case 'kg':
-        return 'lbs'
-      case 'mi':
-        return 'km'
-      case 'km':
-        return 'mi'
-    }
-    };
+      function getNum (input) {
+        const regexUnits = /[a-zA-z]/
+        const regexNumbers = /^\d+\.?\d*\/?\d*\.?\d*$/
+        let index = input.match(regexUnits)
+        if (!index) return false;
+        let num = input.slice(0, index.index);
+        if (num.length === 0) return 1;
+        if (!regexNumbers.test(num)) return false;
 
-    console.log(getNum('gal'))
+        return eval(num).toFixed(5);
+      };
+
+    function test (initNum, initUnit) {
+    const galToL = 3.78541;
+    const lbsToKg = 0.453592;
+    const miToKm = 1.60934;
+    
+    const num = eval(initNum)
+    
+    let convert
+    switch (initUnit) {
+      case 'gal':
+        convert = num * galToL
+        break;
+      case 'l':
+        convert = num / galToL
+        break;
+      case 'lbs':
+        convert = num * lbsToKg
+        break;
+      case 'kg':
+        convert =  num / lbsToKg
+        break;
+      case 'mi':
+        convert = num * miToKm
+        break;
+      case 'km':
+        convert = num / miToKm
+        break;
+      default: return false
+    };
+    console.log(typeof convert.toFixed(5))
+    return convert.toFixed(5);
+  }
+    
+
+    console.log( (test(getNum('5gal'), 'gal')));
    </script>
   </body>
 </html>
