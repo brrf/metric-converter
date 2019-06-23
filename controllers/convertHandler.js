@@ -9,21 +9,31 @@
 function ConvertHandler() {
   
   this.getNum = function(input) {
-    var result;
-    
-    return result;
+  const regex = /[a-zA-z]/
+  let index = input.match(regex)
+  if (!index) return false;
+  let num = input.slice(0, index.index);
+  if (isNaN(eval(num))) return false;
+
+  return num;
   };
   
   this.getUnit = function(input) {
-    var result;
-    
-    return result;
+    // const regex = /[a-zA-z]/
+    // const index = input.match(regex)
+    // if (!index) return false;
+    // index = index.index;
+    // if 
+    // return input.slice(0, index);
   };
   
   this.getReturnUnit = function(initUnit) {
-    var result;
-    
-    return result;
+    const regex = /[a-zA-z]/
+    const index = input.match(regex)
+    if (!index) return false;
+  
+    index = index.index;
+    return input.slice(index);
   };
 
   this.spellOutUnit = function(unit) {

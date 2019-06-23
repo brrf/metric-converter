@@ -71,6 +71,20 @@
           });
         });
       });
+
+      // gall L lbs kg mi km
+    function getNum (input) {
+      const regex = /[a-zA-z]/
+      let index = input.match(regex)
+      if (!index) return false;
+      let unit = input.slice(index.index);
+      console.log(unit === 'gall')
+      if (unit !== 'gall' && unit !== 'L' && unit !== 'lbs' && unit !== 'kg' && unit !== 'mi' && unit !== 'km') return false;
+
+      return unit;
+    };
+
+    console.log(getNum('1/2gall'))
    </script>
   </body>
 </html>
